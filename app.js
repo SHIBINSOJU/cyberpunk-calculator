@@ -1,35 +1,59 @@
 const express = require("express");
 const app = express();
 
-/* Middleware to read form data */
 app.use(express.urlencoded({ extended: true }));
-
-/* Allow CSS & JS files */
 app.use(express.static("public"));
-
-/* Set EJS */
 app.set("view engine", "ejs");
 
-/* Home page */
+/* MEMORY & HISTORY */
+let memory = 0;
+let history = [];
+
+/* HOME */
 app.get("/", (req, res) => {
-  res.render("index", { result: "0" });
+  res.render("index", {
+    result: "0",
+    history,
+    memory
+  });
 });
 
-/* Calculate route */
+/* CALCULATE */
 app.post("/calculate", (req, res) => {
   const expression = req.body.expression;
   let result;
 
   try {
     result = eval(expression);
-  } catch (err) {
+    history.unshift(`${expression} = ${result}`);
+    if (history.length > 5) history.pop();
+  } catch {
     result = "Error";
   }
 
-  res.render("index", { result });
+  res.render("index", {
+    result,
+    history,
+    memory
+  });
 });
 
-/* Start server */
+/* MEMORY ACTIONS */
+app.post("/memory", (req, res) => {
+  const action = req.body.action;
+  const value = Number(req.body.value);
+
+  if (action === "M+") memory += value;
+  if (action === "M-") memory -= value;
+  if (action === "MC") memory = 0;
+
+  res.render("index", {
+    result: value,
+    history,
+    memory
+  });
+});
+
 app.listen(3000, () => {
-  console.log("Cyberpunk Calculator running on port 3000");
+  console.log("Cyberpunk Calculator running");
 });
