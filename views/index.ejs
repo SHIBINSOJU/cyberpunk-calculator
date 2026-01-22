@@ -4,61 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cyberpunk Calculator</title>
+
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#ff2e88">
+
+  <!-- STYLES -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <div class="calculator">
 
-  <!-- SCREEN -->
+  <!-- DISPLAY -->
   <div class="display">
-  <div id="expression-preview"></div>
-  <div id="screen"><%= result %></div>
-</div>
-  <!-- 🔹 MEMORY DISPLAY -->
+    <div id="expression-preview"></div>
+    <div id="screen"><%= result %></div>
+  </div>
+
+  <!-- MEMORY DISPLAY -->
   <div class="memory-display">
     Memory: <%= memory %>
   </div>
 
-  <!-- 🔹 MEMORY BUTTONS -->
+  <!-- MEMORY BUTTONS -->
   <form class="memory-buttons" action="/memory" method="POST">
     <input type="hidden" name="value" value="<%= result %>">
-    <button name="action" value="M+">M+</button>
-    <button name="action" value="M-">M-</button>
-    <button name="action" value="MR">MR</button>
-    <button name="action" value="MC">MC</button>
+    <button type="submit" name="action" value="M+">M+</button>
+    <button type="submit" name="action" value="M-">M-</button>
+    <button type="submit" name="action" value="MR">MR</button>
+    <button type="submit" name="action" value="MC">MC</button>
   </form>
 
   <!-- KEYPAD -->
   <div class="buttons">
+    <!-- ROW 1 -->
     <button onclick="clearScreen()">C</button>
-    
+    <button class="delete" onclick="deleteLast()">⌫</button>
     <button onclick="press('/')">÷</button>
     <button onclick="press('*')">×</button>
-    <button onclick="press('-')">−</button>
-    <button onclick="deleteLast()">⌫</button>
+
+    <!-- ROW 2 -->
     <button onclick="press('7')">7</button>
     <button onclick="press('8')">8</button>
     <button onclick="press('9')">9</button>
-    <button onclick="press('+')">+</button>
+    <button onclick="press('-')">−</button>
 
+    <!-- ROW 3 -->
     <button onclick="press('4')">4</button>
     <button onclick="press('5')">5</button>
     <button onclick="press('6')">6</button>
-    <button onclick="calculate()" class="equal">=</button>
+    <button onclick="press('+')">+</button>
 
+    <!-- ROW 4 -->
     <button onclick="press('1')">1</button>
     <button onclick="press('2')">2</button>
     <button onclick="press('3')">3</button>
+    <button onclick="calculate()" class="equal">=</button>
 
+    <!-- ROW 5 -->
     <button onclick="press('0')" class="zero">0</button>
     <button onclick="press('.')">.</button>
   </div>
 
-  <!-- 🔹 HISTORY PANEL -->
+  <!-- HISTORY -->
   <div class="history">
     <h3>History</h3>
     <ul>
@@ -70,17 +82,20 @@
 
 </div>
 
-<!-- HIDDEN FORM FOR CALCULATION -->
+<!-- HIDDEN FORM (FRONTEND → BACKEND BRIDGE) -->
 <form id="calcForm" action="/calculate" method="POST">
   <input type="hidden" name="expression" id="expr">
 </form>
 
+<!-- SERVICE WORKER -->
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
 </script>
 
+<!-- LOGIC -->
 <script src="/js/calculator.js"></script>
+
 </body>
 </html>
