@@ -31,11 +31,14 @@ body {
 #screen {
   background: linear-gradient(180deg, #000, #020005);
   color: #00f7ff;
-  font-size: 2.2rem;
+  font-size: 3rem;
   text-align: right;
   padding: 16px 14px;
   border-radius: 14px;
   margin-bottom: 6px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
   overflow-x: auto;
   white-space: nowrap;
   box-shadow:
@@ -168,4 +171,14 @@ button:active {
     padding: 16px 0;
     font-size: 1.1rem;
   }
+}
+
+/* FULL DISPLAY AREA */
+.display {
+  height: 120px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 12px 10px;
+  margin-bottom: 10px;
 }
