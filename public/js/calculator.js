@@ -1,6 +1,12 @@
 let expression = "";
 
 function press(value) {
+  const lastChar = expression.slice(-1);
+
+  if ("+-*/".includes(lastChar) && "+-*/".includes(value)) {
+    return; // stop invalid operator spam
+  }
+
   expression += value;
   document.getElementById("screen").innerText = expression;
 }
