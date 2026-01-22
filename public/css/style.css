@@ -60,3 +60,15 @@ button:active {
 .zero {
   grid-column: span 2;
 }
+
+.history {
+  color: #00f7ff;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+.history li {
+  list-style: none;
+  border-bottom: 1px solid #ff2e88;
+  padding: 5px 0;
+}
