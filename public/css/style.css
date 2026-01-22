@@ -37,6 +37,17 @@ body {
   margin-bottom: 12px;
 }
 
+/* EXPRESSION PREVIEW */
+#expression-preview {
+  font-size: 0.9rem;
+  color: rgba(0, 247, 255, 0.7);
+  margin-bottom: 4px;
+  width: 100%;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 /* SCREEN */
 #screen {
   background: linear-gradient(180deg, #000, #020005);
