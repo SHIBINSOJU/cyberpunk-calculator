@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cyberpunk Calculator</title>
+
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#ff2e88">
   <link rel="stylesheet" href="/css/style.css">
@@ -11,8 +12,25 @@
 <body>
 
 <div class="calculator">
-  <div id="screen"> <%= result %> </div>
 
+  <!-- SCREEN -->
+  <div id="screen"><%= result %></div>
+
+  <!-- 🔹 MEMORY DISPLAY -->
+  <div class="memory-display">
+    Memory: <%= memory %>
+  </div>
+
+  <!-- 🔹 MEMORY BUTTONS -->
+  <form class="memory-buttons" action="/memory" method="POST">
+    <input type="hidden" name="value" value="<%= result %>">
+    <button name="action" value="M+">M+</button>
+    <button name="action" value="M-">M-</button>
+    <button name="action" value="MR">MR</button>
+    <button name="action" value="MC">MC</button>
+  </form>
+
+  <!-- KEYPAD -->
   <div class="buttons">
     <button onclick="clearScreen()">C</button>
     <button onclick="press('/')">÷</button>
@@ -36,8 +54,20 @@
     <button onclick="press('0')" class="zero">0</button>
     <button onclick="press('.')">.</button>
   </div>
+
+  <!-- 🔹 HISTORY PANEL -->
+  <div class="history">
+    <h3>History</h3>
+    <ul>
+      <% history.forEach(item => { %>
+        <li><%= item %></li>
+      <% }) %>
+    </ul>
+  </div>
+
 </div>
 
+<!-- HIDDEN FORM FOR CALCULATION -->
 <form id="calcForm" action="/calculate" method="POST">
   <input type="hidden" name="expression" id="expr">
 </form>
