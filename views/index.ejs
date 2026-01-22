@@ -42,6 +42,12 @@
   <input type="hidden" name="expression" id="expr">
 </form>
 
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js");
+}
+</script>
+
 <script src="/js/calculator.js"></script>
 </body>
 </html>
