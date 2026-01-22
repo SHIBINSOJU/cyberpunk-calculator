@@ -27,6 +27,16 @@ body {
     inset 0 0 25px rgba(255, 46, 136, 0.15);
 }
 
+/* FULL DISPLAY AREA (PHONE STYLE) */
+.display {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px 10px;
+  margin-bottom: 12px;
+}
+
 /* SCREEN */
 #screen {
   background: linear-gradient(180deg, #000, #020005);
@@ -98,6 +108,14 @@ button {
     0 0 10px #ff2e88,
     inset 0 0 8px rgba(255, 46, 136, 0.25);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* DELETE BUTTON */
+button.delete {
+  color: #00f7ff;
+  box-shadow:
+    0 0 10px rgba(0, 247, 255, 0.7),
+    inset 0 0 8px rgba(0, 247, 255, 0.3);
 }
 
 /* BUTTON PRESS */
